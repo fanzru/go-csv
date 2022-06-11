@@ -12,16 +12,17 @@ import (
 var Interactor definitions.Notify
 
 func NotifySlack(c echo.Context) error {
-	data := &[]models.Mahasiswa{}
+	data := []*models.Mahasiswa{}
 	if err := c.Bind(&data); err != nil {
 		return res.ResponseErr(c, 400, err.Error())
 	}
 	err := usecase.DoNotifySlackSend(models.NotifSlackParam{
 		Text: "Hello",
+		Data: data,
 	})
 	if err != nil {
 		return res.ResponseErr(c, 400, err.Error())
 	}
 
-	return res.ResponseSuccess(c, "success", data)
+	return res.ResponseSuccess(c, "success to send at slack", nil)
 }
