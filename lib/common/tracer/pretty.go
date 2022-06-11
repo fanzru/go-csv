@@ -5,11 +5,13 @@ import (
 	"fmt"
 )
 
-func PrintJson(data []byte, name string) error {
+func PrintJson(data interface{}, name string) error {
 	value, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
 		return err
 	}
+	// Marshall the Colorized JSON
+
 	fmt.Printf("======================= %s =======================\n", name)
 	fmt.Println(value)
 	fmt.Println("==============================================")

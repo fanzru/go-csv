@@ -19,10 +19,10 @@ type ErrorResponse struct {
 	Message string `json:"message"`
 }
 
-func ResponseErr(c echo.Context, code int, status bool, message string) error {
+func ResponseErr(c echo.Context, code int, message string) error {
 	res := ErrorResponse{
 		Code:    code,
-		Status:  status,
+		Status:  false,
 		Message: message,
 	}
 	return c.JSON(http.StatusBadRequest, res)
@@ -34,5 +34,5 @@ func ResponseSuccess(c echo.Context, message string, data interface{}) error {
 		Message: message,
 		Data:    data,
 	}
-	return c.JSON(http.StatusBadRequest, res)
+	return c.JSON(http.StatusOK, res)
 }
