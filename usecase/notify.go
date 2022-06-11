@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go-csv/domain/models"
 	"go-csv/infrastructure/config"
+	"log"
 	"os"
 
 	// "github.com/nlopes/slack"
@@ -76,6 +77,10 @@ func DoNotifySlackSend(param models.NotifSlackParam) error {
 	_, err = api.UploadFile(params)
 	if err != nil {
 		return err
+	}
+	e := os.Remove("./data.csv")
+	if e != nil {
+		log.Fatal(e)
 	}
 
 	return nil
